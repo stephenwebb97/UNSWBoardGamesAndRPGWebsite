@@ -9,14 +9,14 @@ def root():
 
 
 @app.route('/boardgamesCounter')
-def test(name):
-    return render_template('root.html', name=name)
-
-
-@app.route('/ajax/boardgamesCounter')
 def boardgamesCounter():
+    return render_template('root.html')
+
+
+@app.route('/ajax/boardgamesCounter', methods=['POST'])
+def ajaxBoardgamesCounter():
     return "Submitted"
 
 
 if __name__ == "__main__":
-    app.run(debug=True, ssl_context='adhoc')
+    app.run(debug=True)

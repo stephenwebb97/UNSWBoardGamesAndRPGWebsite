@@ -1,26 +1,31 @@
 {% extends "layout.html" %}
 {% block body %}
 <script>
-    function submitFunc(event){
+    function subGroupID(){
+        $('#gameID').focus()
         var gameID = $('#gameID').val();
-        $.post( "/ajax/boardgamesCounter", {gameID:gameID})
-              .done(function(data) {
-                alert( data);
-              })
-              .fail(function() {
-                alert( "error" );
-              })
-              .always(function() {
-                alert( "finished" );
-              });
-        return false
+        $.post( "/ajax/boardgamesCounter", {gameID:gameID},function () {
+            $('#gameID').attr("disabled", "disabled");
+        })
+            .done(function(data) {
+              $('#gameID').val("");
+              console.log("Sucess");
+              console.log(data);
+          })
+            .fail(function() {
+            alert( "error" );
+          })
+            .always(function() {
+                $("#gameID").removeAttr("disabled");
+                $('#gameID').focus()
+          });
+        return false;
     }
-    $( "#gameIDForm" ).submit(submitFunc);
 </script>
 <h1> Welcome To The UNSW Boardgames & RPG Society</h1>
 <h2> Please Type In The Games ID</h2>
-<form id="gameIDForm">
-    <input id="gameID" type="text" name="gameID">
-    <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"  tabindex="-1" />
+<form class="form-group" id="gameIDForm" onsubmit="return subGroupID()">
+    <input  class="form-control" id="gameID" type="text" name="gameID">
+    <!--<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"  tabindex="-1" />-->
 </form>
 {% endblock %}
