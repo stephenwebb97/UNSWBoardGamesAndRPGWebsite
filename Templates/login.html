@@ -1,27 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-<script>
-    function subGroupID() {
-        $('#gameID').focus()
-        var gameID = $('#gameID').val();
-        $.post("/ajax/boardgamesCounter", {gameID: gameID}, function () {
-            $('#gameID').attr("disabled", "disabled");
-        })
-            .done(function (data) {
-                $('#gameID').val("");
-                console.log("Sucess");
-                console.log(data);
-            })
-            .fail(function () {
-                alert("error");
-            })
-            .always(function () {
-                $("#gameID").removeAttr("disabled");
-                $('#gameID').focus()
-            });
-        return false;
-    }
-</script>
+
 <style>
     .textBox {
         width: 90%;
@@ -33,7 +12,7 @@
     }
 </style>
 <!--<h1> Welcome To The UNSW Boardgames & RPG Society</h1>-->
-<h2 class="title"> Please Type/Scan In The Games ID</h2>
+<h2 class="title"> Login Please</h2>
 <form class="form-group" id="gameIDForm" onsubmit="return subGroupID()">
     <div>
         <input class="form-control textBox" id="gameID" type="text" name="gameID">
